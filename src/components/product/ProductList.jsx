@@ -4,6 +4,7 @@ import styles from '../../styles/ProductList.module.css';
 import {useState, useEffect} from 'react';
 import useSWR from 'swr';
 import {fetcher} from '../utils/fetch';
+import AddProduct from './AddProduct';
 
     const mockProducts = [
         { id: 1, name: "Product 1", price: 100 },
@@ -12,6 +13,10 @@ import {fetcher} from '../utils/fetch';
     ];
 
 const ProductList = () => {
+
+    dodajProdukt = () => {
+        <AddProduct/>
+    }
 
     // const [products, setProducts] = useState([]);
     // console.log(products);
@@ -30,6 +35,7 @@ const ProductList = () => {
 
         <div className={styles.container}>
             <h1>Product List</h1>
+            <button onClick={dodajProdukt} className="bg-cyan-500 px-4 py-2 text-black rounded">Dodaj Produkt</button>
             {products.map((product) => (
                 <ProductCart key={product.id} product={product}/>
             ))}
