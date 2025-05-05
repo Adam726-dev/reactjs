@@ -4,6 +4,7 @@ import styles from '../../styles/ProductList.module.css';
 import useSWR from 'swr';
 import {fetcher} from '../utils/fetch';
 import AddProduct from './AddProduct';
+import { Link } from 'react-router-dom';
 
 const mockProducts = [
     { id: 1, name: "Product 1", price: 100 },
@@ -19,8 +20,8 @@ const ProductList = () => {
     }
 
     const {data: products, error, isLoading} = useSWR('https://fakestoreapi.com/products', fetcher)
-    if(error) return <div>Failed to load</div>
-    if(isLoading) return <div>Loading...</div>
+    if(error) return <div>Błąd</div>
+    if(isLoading) return <div>Pobieranie...</div>
     console.log(products)
     return (
         <div className={styles.container}>
@@ -28,7 +29,9 @@ const ProductList = () => {
             <button onClick={toggleAddProduct} className="bg-cyan-500 px-4 py-2 text-black rounded">Dodaj Produkt</button>
             {showAddProduct && <AddProduct />}
             {products.map((product) => (
-                <ProductCart key={product.id} product={product}/>
+                <Link key={product.id} to={`/product/${product.id}`}>
+                    <ProductCart product={product}/>
+                </Link>
             ))}
         </div>
     );
