@@ -51,7 +51,7 @@ const AddProduct = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)} className="float-left flex p-10 bg-center flex-col gap-4 m-10 border-2 border-gray-200"> 
+            <form onSubmit={handleSubmit(onSubmit)} className=" flex justify-center p-10 bg-center flex-col gap-4 m-10 border-2 border-gray-200"> 
             <h1>Dodawanie Produktu</h1>
             {success && <span className='text-green-500 text-l'>{success}</span>}
             <input className='m-3 p-3 border-2 rounded-md' autoFocus type='text' placeholder='Nazwa' {...register('title')} />
@@ -67,7 +67,7 @@ const AddProduct = () => {
             </select>
             <input className='m-3 p-3 border-2 rounded-md' autoFocus type='text' placeholder='Obrazek (url)'{...register('url')} />
 
-            <button type="submit" className="btn btn-primary bg-blue-500">Dodaj</button>
+            <button type="submit" className="w-51 btn btn-primary bg-blue-500">Dodaj</button>
         </form>
         </div>
     );

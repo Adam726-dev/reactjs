@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 const Header = ({user}) => {
     return (
         <div>
-            <Navbar user={user} />
+            {/* <Navbar user={user} /> */}
             <ProductList />
         </div>
     );

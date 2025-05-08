@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { CartContext } from '../../context/CartContext';
-
+import Navbar from '../Navbar';
 const ShoppingCart = () => {
-  const { cart, removeProduct, clearCart } = useContext(CartContext);
+  const { cart, removeProduct, clearCart, cartItemsCount } = useContext(CartContext);
 
   useEffect(() => {
     console.log('ShoppingCart cart state:', cart);
@@ -15,8 +15,10 @@ const ShoppingCart = () => {
   const totalSum = cart.reduce((sum, product) => sum + product.price, 0);
 
   return (
+    <>
     <div className="overflow-hidden p-4 w-screen h-full flex flex-col items-center justify-center ">
-      <h1 className='mt-5 mb-4'>Twój koszyk</h1>
+      <h1 className='mb-4'>Twój koszyk</h1>
+      <h3>{totalSum}$ | Ilość rzeczy: {cartItemsCount}</h3>
       <ul>
         {cart.map((product) => (
           <li key={product.id} className="flex justify-between items-center border-b py-2">
@@ -32,7 +34,7 @@ const ShoppingCart = () => {
           </li>
         ))}
       </ul>
-      <span className="font-bold mt-4 block">Suma: ${totalSum.toFixed(2)}</span>
+      {/* <span className="font-bold mt-4 block">Suma: ${totalSum.toFixed(2)}</span> */}
       <button
         onClick={clearCart}
         className="mt-4 bg-gray-700 text-black px-4 py-2 rounded"
@@ -40,6 +42,7 @@ const ShoppingCart = () => {
         Wyczyść koszyk
       </button>
     </div>
+    </>
   );
 };
 

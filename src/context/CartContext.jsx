@@ -1,10 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { useCallback, createContext, useState, useEffect } from 'react';
 
 export const CartContext = createContext({
   cart: [],
   addProduct: () => {},
   removeProduct: () => {},
   clearCart: () => {},
+  cartValue: 0,
+  cartItemsCount: 0,
 });
 
 export const CartProvider = ({ children }) => {
@@ -33,21 +35,24 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addProduct = (product) => {
+  const addProduct = useCallback((product) => {
     console.log('Adding product to cart:', product);
     setCart((prevCart) => [...prevCart, product]);
-  };
+  },[]);
 
-  const removeProduct = (productId) => {
+  const removeProduct = useCallback((productId) => {
     setCart((prevCart) => prevCart.filter((p) => p.id !== productId));
-  };
+  },[]);
 
   const clearCart = () => {
     setCart([]);
   };
 
+  const cartValue = cart.reduce((sum, product) => sum + Number(product.price), 0).toFixed(2);
+  const cartItemsCount = cart.length;
+
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct, clearCart }}>
+    <CartContext.Provider value={{ cart, addProduct, removeProduct, clearCart, cartValue, cartItemsCount }}>
       {children}
     </CartContext.Provider>
   );
